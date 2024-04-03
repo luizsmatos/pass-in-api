@@ -1,0 +1,23 @@
+POST http://localhost:3333/events
+Content-Type: application/json
+
+{
+  "title": "Novo Evento",
+  "details": "Um evento para reunir a comunidade de desenvolvedores",
+  "maximumAttendees": 1
+}
+
+###
+POST http://localhost:3333/events/28684a83-ebcb-4681-b5e9-611a246a01a9/attendees
+Content-Type: application/json
+
+{
+  "name": "Luiz Gustavo",
+  "email": "luizsmatos2@gmail.com"
+}
+
+###
+GET http://localhost:3333/events/28684a83-ebcb-4681-b5e9-611a246a01a9
+
+###
+GET http://localhost:3333/attendees/1/badge
