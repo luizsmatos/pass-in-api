@@ -1,5 +1,8 @@
 import fastify from 'fastify'
+import fastifySwagger from '@fastify/swagger'
+import fastifySwaggerUi from '@fastify/swagger-ui'
 import {
+  jsonSchemaTransform,
   serializerCompiler,
   validatorCompiler,
 } from 'fastify-type-provider-zod'
@@ -12,6 +15,22 @@ import { checkIn } from './routes/check-in'
 import { getEventAttendees } from './routes/get-event-attendees'
 
 const app = fastify()
+
+app.register(fastifySwagger, {
+  swagger: {
+    consumes: ['application/json'],
+    produces: ['application/json'],
+    info: {
+      title: 'Event Management API',
+      description: 'A simple API to manage events',
+      version: '1.0.0',
+    },
+  },
+  transform: jsonSchemaTransform,
+})
+app.register(fastifySwaggerUi, {
+  routePrefix: '/docs',
+})
 
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
